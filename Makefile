@@ -14,7 +14,7 @@ build:
 	flatpak-builder --force-clean --ccache --require-changes --repo=repo \
 		--subject="Nightly build of fish, `date`" \
 		--allow-missing-runtimes \
-		${EXPORT_ARGS} app com.visualstudio.code.tool.fish.yaml
+		${EXPORT_ARGS} app com.visualstudio.code.tool.fish.yml
 
 clean-cache:
 	rm -rf .flatpak-builder/build
