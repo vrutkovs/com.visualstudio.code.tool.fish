@@ -8,7 +8,8 @@ install-deps:
 	flatpak --user remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 	flatpak --user install -y flathub \
 		org.freedesktop.Platform/x86_64/19.08 \
-		org.freedesktop.Sdk/x86_64/19.08
+		org.freedesktop.Sdk/x86_64/19.08 \
+		com.visualstudio.code/x86_64/stable
 
 build:
 	flatpak-builder --force-clean --ccache --require-changes --repo=repo \
