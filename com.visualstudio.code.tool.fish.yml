@@ -1,0 +1,34 @@
+id: com.visualstudio.code.tool.fish
+default-branch: stable
+build-extension: true
+sdk: org.freedesktop.Sdk//19.08
+runtime: com.visualstudio.code
+runtime-version: stable
+separate-locales: false
+appstream-compose: false
+build-options:
+  prefix: /app/tools/fish
+  strip: true
+cleanup:
+  - "*.a"
+  - "*.la"
+  - /share/man
+modules:
+
+  - name: fish
+    buildsystem: cmake-ninja
+    build-options:
+      ldflags: -ltinfo
+    sources:
+      - type: archive
+        url: "https://github.com/fish-shell/fish-shell/releases/download/3.1.0/fish-3.1.0.tar.gz"
+        sha256: e5db1e6839685c56f172e1000c138e290add4aa521f187df4cd79d4eab294368
+
+  - name: bundle-setup
+    buildsystem: simple
+    build-commands:
+      - install -Dm644 ${FLATPAK_ID}.metainfo.xml -t ${FLATPAK_DEST}/share/metainfo
+      - appstream-compose --basename=${FLATPAK_ID} --prefix=${FLATPAK_DEST} --origin=flatpak ${FLATPAK_ID}
+    sources:
+      - type: file
+        path: com.visualstudio.code.tool.fish.metainfo.xml
