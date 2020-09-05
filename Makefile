@@ -6,23 +6,18 @@ prepare-repo:
 
 install-deps:
 	flatpak --user remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
-	flatpak --user install -y flathub \
-		org.freedesktop.Platform/x86_64/19.08 \
-		org.freedesktop.Sdk/x86_64/19.08 \
-		com.visualstudio.code/x86_64/stable
+	flatpak --user install -y flathub org.freedesktop.Platform//20.08 org.freedesktop.Sdk//20.08 || true
 
 build:
 	flatpak-builder --force-clean --ccache --require-changes --repo=repo \
-		--subject="Nightly build of fish, `date`" \
-		--allow-missing-runtimes \
+		--subject="Fish, `date`" \
 		${EXPORT_ARGS} app com.visualstudio.code.tool.fish.yml
 
 clean-cache:
 	rm -rf .flatpak-builder/build
 
 update-repo:
-	flatpak build-update-repo --prune --prune-depth=20 repo
-	echo 'gpg-verify-summary=false' >> repo/config
+	flatpak build-update-repo --prune --prune-depth=20 --generate-static-deltas repo
 	rm -rf repo/.lock
 
 copy-to-export:
