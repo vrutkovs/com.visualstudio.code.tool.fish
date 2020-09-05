@@ -6,7 +6,7 @@ prepare-repo:
 
 install-deps:
 	flatpak --user remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
-	flatpak --user install -y flathub org.freedesktop.Platform//20.08 org.freedesktop.Sdk//20.08 || true
+	flatpak --user install -y flathub org.freedesktop.Platform//20.08 org.freedesktop.Sdk//20.08 com.visualstudio.code-oss//stable || true
 
 build:
 	flatpak-builder --force-clean --ccache --require-changes --repo=repo \

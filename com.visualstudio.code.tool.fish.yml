@@ -2,7 +2,7 @@ id: com.visualstudio.code.tool.fish
 default-branch: stable
 build-extension: true
 sdk: org.freedesktop.Sdk//20.08
-runtime: com.visualstudio.code
+runtime: com.visualstudio.code-oss
 runtime-version: stable
 separate-locales: false
 appstream-compose: false
